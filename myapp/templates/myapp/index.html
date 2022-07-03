@@ -1,17 +1,13 @@
-{% load static %}
-
-<html>
-    <head>
-        <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
-    </head>
-    <body>
-        <h1> This is a templates, This is being rendered</h1>
-
+{% extends 'myapp/base.html' %}
+{% load static%}
+{% block content %}
+    
         {% for product in products %}
         
         <a href = "{% url 'myapp:product_detail' product.id %}">
         {{product.name}} {{product.price}} {{product.desc}}</br>
+        <img src = "{{product.image.url}}" alt="">
         </a>
         {% endfor %}
-    </body>
-</html>
+{% endblock %}
+
