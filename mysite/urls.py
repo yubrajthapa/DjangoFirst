@@ -1,5 +1,8 @@
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls.static import static
+from django.conf import settings
+# for displaying image import settings and static
 
 
 urlpatterns = [
@@ -7,3 +10,6 @@ urlpatterns = [
     path('myapp/', include('myapp.urls')),
  
 ]
+
+# displaying an image
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
