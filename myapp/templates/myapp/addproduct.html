@@ -1,0 +1,12 @@
+<form method="POST">
+    <!--In Django when we are submitting data via form always use csrf_token before input field-->
+    {% csrf_token %}
+    <input placeholder="Name" type= "text" name="name" id="name">
+    <input placeholder="Price" type= "text" name="price" id="price">
+    <input placeholder="Desc" type= "text" name="desc" id="desc"> 
+    <input placeholder="Image" type= "file" accept="image/*" name="upload" id="upload">
+    <!--This will only accept the image file type-->
+    <input type="submit" name ="Add Product" value="Add Product" id="">
+
+</form>
+<!--Now we create a view to render this form in views.py-->
