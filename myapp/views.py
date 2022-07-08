@@ -53,6 +53,6 @@ def delete_product(request, id):
     }
     if request.method == "POST":
         product.delete()
-        return render(request,'/myapp/products')
-    return render(request, 'myapp/delete.html', context)
+        return redirect('/myapp/products')
+    return render(request,'myapp/delete.html',context)
    
