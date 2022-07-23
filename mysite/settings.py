@@ -117,7 +117,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #for displaying an image
 MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/media/'
+#After the user is loggedin this page will open
 LOGIN_REDIRECT_URL= 'myapp:products'
+#If user tries to access login restricted page and if user is not loggedin redirect to
 LOGIN_URL = 'users:login'
 
 
