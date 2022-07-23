@@ -7,6 +7,7 @@ from .models import Product
 def index(request):
     return HttpResponse("Hello World")
 
+# Accessing and displaying data from database.
 def products(request):
     products = Product.objects.all()
     context = {
