@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from . forms import NewUserForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def register(request):
@@ -14,4 +15,8 @@ def register(request):
     }
     return render(request, 'users/register.html',context)
 
- 
+#This will check if the user is logged in before running this views. 
+# If the user is not logged in this view will not be running
+@login_required 
+def profile(request):
+    return render(request, 'users/profile.html')
