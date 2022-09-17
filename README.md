@@ -1,2 +1,2 @@
 # DjangoFirst
-This is my first Django project
+This is my first Django E-commerce project
