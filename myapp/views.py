@@ -2,6 +2,7 @@ from curses.ascii import HT
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Product
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -22,14 +23,16 @@ def product_detail(request, id):
     }
     return render(request, 'myapp/detail.html', context)
 
+@login_required
 def add_product(request):
     if request.method=='POST':
         name = request.POST.get('name')
         price = request.POST.get('price')
         desc = request.POST.get('desc')
         image = request.FILES['upload']
+        seller_name = request.user
         # Saving these data into the database
-        product = Product(name=name,price=price, desc=desc,image=image)
+        product = Product(name=name,price=price, desc=desc,image=image,seller_name=seller_name)
         product.save()
     return render(request, 'myapp/addproduct.html')
 
