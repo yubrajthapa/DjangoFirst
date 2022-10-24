@@ -30,7 +30,7 @@ def add_product(request):
         price = request.POST.get('price')
         desc = request.POST.get('desc')
         image = request.FILES['upload']
-        seller_name = request.user
+        seller_name = request.user #Sets currently loggedin user as seller name
         # Saving these data into the database
         product = Product(name=name,price=price, desc=desc,image=image,seller_name=seller_name)
         product.save()
