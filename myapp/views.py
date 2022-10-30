@@ -1,10 +1,12 @@
+from audioop import reverse
 from curses.ascii import HT
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Product
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -79,13 +81,20 @@ class ProductUpdateView(UpdateView):
 
 def delete_product(request, id):
     product = Product.objects.get(id=id)
-    context = {
-        'product': product,
-    }
     if request.method == "POST":
         product.delete()
         return redirect('/myapp/products')
+    context = {
+        'product': product,
+    }
     return render(request,'myapp/delete.html',context)
+
+
+class ProductDelete(DeleteView):
+    model = Product
+    success_url = reverse_lazy('myapp:products')
+   
+
    
 def my_listings(request):
     products = Product.objects.filter(seller_name=request.user)
