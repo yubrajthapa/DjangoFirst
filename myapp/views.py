@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Product
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView
-from django.views.generic import DetailView
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView
 
 # Create your views here.
 
@@ -51,6 +51,12 @@ def add_product(request):
         product = Product(name=name,price=price, desc=desc,image=image,seller_name=seller_name)
         product.save()
     return render(request, 'myapp/addproduct.html')
+
+# Class based view for creating  a product
+class ProuctCreateView(CreateView):
+    model = Product
+    fields = ['name','price','desc','image','seller_name']
+
 
 def update_product(request,id):
     product = Product.objects.get(id=id)
