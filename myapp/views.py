@@ -3,11 +3,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Product
 from django.contrib.auth.decorators import login_required
-
+from django.views.generic import ListView
 
 # Create your views here.
-def index(request):
-    return HttpResponse("Hello World")
+
 
 # Accessing and displaying data from database.
 def products(request):
@@ -16,6 +15,15 @@ def products(request):
         'products' : products
     }
     return render(request, 'myapp/index.html', context)
+
+
+# Class based views for above products view[ListView]
+class ProductListView(ListView):
+    model = Product
+    template_name= 'myapp/index.html'
+    context_object_name = 'products'
+    
+
 
 def product_detail(request, id):
     product = Product.objects.get(id=id)

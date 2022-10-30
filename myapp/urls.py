@@ -4,8 +4,8 @@ from . import views
 
 app_name = 'myapp'
 urlpatterns = [
-    path('', views.index),
-    path('products/', views.products, name='products'),
+    #path('products/', views.products, name='products'), #url for function based view
+    path('products/', views.ProductListView.as_view(), name='products'), #url for class based view 
     path('products/<int:id>/', views.product_detail, name='product_detail'),
     path('products/add/', views.add_product, name='add_product'),
     path('products/update/<int:id>/', views.update_product, name='update_product'),
