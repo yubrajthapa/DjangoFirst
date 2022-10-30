@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from .models import Product
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
+from django.views.generic import DetailView
 
 # Create your views here.
 
@@ -31,6 +32,12 @@ def product_detail(request, id):
         'product' : product
     }
     return render(request, 'myapp/detail.html', context)
+
+# Class based view for above product detail view[DetailView]
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'myapp/detail.html'
+    context_object_name = 'product'
 
 @login_required
 def add_product(request):
