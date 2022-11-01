@@ -15,6 +15,7 @@ class ProductAdmin(admin.ModelAdmin):
     def set_price_to_zero(self,request,queryset):
         queryset.update(price = 0)
     actions = ('set_price_to_zero',) #displays this option in action
+    list_editable = ('price', 'desc') # Makes these fields editable on the go
     #queryset are those products selected by user on which we want to perform this aciton
 
 admin.site.register(Product,ProductAdmin)
