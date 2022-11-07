@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -16,6 +17,20 @@ def products(request):
     products = Product.objects.all()
     context = {
         'products' : products
+    }
+    return render(request, 'myapp/index.html', context)
+
+#Using function based views with paginator for above operation
+def productsPaginator(request):
+    page_obj = products = Product.objects.all()  
+    product_name = request.GET.get('product_name')
+    if product_name!='' and product_name is not None:
+        page_obj = products.filter(name__icontains = product_name) 
+    paginator = Paginator(page_obj,4) #no of products to display
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'page_obj' : page_obj
     }
     return render(request, 'myapp/index.html', context)
 
